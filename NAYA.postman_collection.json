@@ -1,0 +1,925 @@
+{
+	"info": {
+		"_postman_id": "8c1ea2af-1564-4aea-9d2b-5ca3202c72c2",
+		"name": "NAYA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11093231"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Valid Payload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.username).to.equals(\"Test Username\") \r",
+									"        && pm.expect(response.password).to.equals(\"Test Password\")\r",
+									"        && pm.expect(response.color).to.equals(\"Red\")\r",
+									"        && pm.expect(response._id).to.not.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"userId\", response._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Test Username\",\r\n    \"password\": \"Test Password\",\r\n    \"color\": \"Red\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No Color Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.error).to.equals(\"Failure\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Test Username\",\r\n    \"password\": \"Test Password\",\r\n    \"color\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No Username Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.error).to.equals(\"Failure\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"Test Password\",\r\n    \"color\": \"Red\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No Password Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.error).to.equals(\"Failure\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Test Username\",\r\n    \"password\": \"\",\r\n    \"color\": \"Red\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sketch",
+			"item": [
+				{
+					"name": "Create Sketch",
+					"item": [
+						{
+							"name": "Valid Payload",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.userId[0]).to.equals(pm.collectionVariables.get(\"userId\")) \r",
+											"        && pm.expect(response.name).to.equals(\"Test Sketch\")\r",
+											"        && pm.expect(response.base64).to.equals(\"Test Sketch\")\r",
+											"        && pm.expect(response._id).to.not.be.null;\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set('sketchId', response._id)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Test Sketch\",\r\n    \"base64\" : \"Test Sketch\",\r\n    \"userId\": \"{{userId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Name Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.message).to.equals(\"Sketch validation failed: name: Path `name` is required.\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\",\r\n    \"base64\" : \"Test Sketch\",\r\n    \"userId\": \"{{userId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Base64 Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.message).to.equals(\"Sketch validation failed: base64: Path `base64` is required.\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Test Sketch\",\r\n    \"base64\" : \"\",\r\n    \"userId\": \"{{userId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty UserId Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.message).to.equals(\"Sketch validation failed: userId.0: Cast to [ObjectId] failed for value \\\"[\\\"\\\"]\\\" at path \\\"userId.0\\\"\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Test Sketch\",\r\n    \"base64\" : \"Test Sketch\",\r\n    \"userId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Sketch",
+					"item": [
+						{
+							"name": "Valid Payload",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.userId[0]).to.equals(pm.collectionVariables.get(\"userId\")) \r",
+											"        && pm.expect(response.name).to.equals(\"Updated Test Sketch\")\r",
+											"        && pm.expect(response.base64).to.equals(\"Updated Test Sketch\")\r",
+											"        && pm.expect(response._id).to.not.be.null;\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set('sketchId', response._id)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Updated Test Sketch\",\r\n    \"base64\" : \"Updated Test Sketch\",\r\n    \"sketchId\": \"{{sketchId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateSketch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateSketch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Name Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.name).to.be.equals(\"\") \r",
+											"        && pm.expect(response.base64).to.equals(\"Updated Test Sketch\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\",\r\n    \"base64\" : \"Updated Test Sketch\",\r\n    \"sketchId\": \"{{sketchId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateSketch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateSketch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty Base64 Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.base64).to.be.equals(\"\") \r",
+											"        && pm.expect(response.name).to.equals(\"Updated Test Sketch\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Updated Test Sketch\",\r\n    \"base64\" : \"\",\r\n    \"sketchId\": \"{{sketchId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateSketch",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateSketch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty UserId Field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.message).to.equals(\"Sketch validation failed: userId.0: Cast to [ObjectId] failed for value \\\"[\\\"\\\"]\\\" at path \\\"userId.0\\\"\") \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Test Sketch\",\r\n    \"base64\" : \"Test Sketch\",\r\n    \"userId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/metadata",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fetch Sketch with Userinfo By Id",
+					"item": [
+						{
+							"name": "Valid Sketch Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.sketch._id).to.equals(pm.collectionVariables.get(\"sketchId\"))\r",
+											"        && pm.expect(response.sketch.userId).to.not.be.null\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"sketchId\": \"{{sketchId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sketchWithUserInfo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sketchWithUserInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Sketch Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', function () {\r",
+											"    pm.expect(response.error).to.not.be.null;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"sketchId\": \"898988\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sketchWithUserInfo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sketchWithUserInfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fetch Sketch By Id",
+					"item": [
+						{
+							"name": "Valid Sketch Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', () => {\r",
+											"    pm.expect(response.sketch._id).to.equals(pm.collectionVariables.get(\"sketchId\"))\r",
+											"        && pm.expect(response.sketch.userId).to.not.be.null\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"sketchId\": \"{{sketchId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sketchById",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sketchById"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Sketch Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json()\r",
+											"\r",
+											"pm.test('Check response code', function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test('Check response payload', function () {\r",
+											"    pm.expect(response.error).to.not.be.null;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"sketchId\": \"898988\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sketchById",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sketchById"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fetch All Sketches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(typeof response.allSketches).to.equals(\"object\")\r",
+									"        && pm.expect(response.allSketches).to.not.be.null\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/allSketches",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"allSketches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Random User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.username).to.equals(\"L-Test Username\") \r",
+									"        && pm.expect(response.password).to.equals(\"L-Test Password\")\r",
+									"        && pm.expect(response.color).to.equals(\"Red\")\r",
+									"        && pm.expect(response._id).to.not.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"random_userId\", response._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"L-Test Username\",\r\n    \"password\": \"L-Test Password\",\r\n    \"color\": \"Red\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User To Sketch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"\r",
+									"pm.test('Check response code', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Check response payload', () => {\r",
+									"    pm.expect(response.updatedSketch).to.be.null\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"{{sketchId}}\",\r\n    \"userId\": \"{{random_userId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/addUserToSketch",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"addUserToSketch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "sketchId",
+			"value": ""
+		},
+		{
+			"key": "random_userId",
+			"value": ""
+		}
+	]
+}
